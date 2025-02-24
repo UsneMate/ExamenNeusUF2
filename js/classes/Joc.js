@@ -148,11 +148,12 @@ export default class Joc {
 
         if (this.meuTauler.mapa[i][j] === 4) {
           image(this.imgDracula, j * 30, i * 30, 30, 30);
+        }
       }
     }
   }
 
-  dibuixarPersonatge(imgPersonatgeDreta) {
+  dibuixarPersonatge(imgPersonatgeDreta){
     this.meuPersonatge.drawPersonatge(imgPersonatgeDreta);
   }
 
