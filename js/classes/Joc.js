@@ -141,6 +141,13 @@ export default class Joc {
         if (this.meuTauler.mapa[i][j] === 1) {
           image(this.imgTerra, j * 30, i * 30, 30, 30);
         }
+
+        if (this.meuTauler.mapa[i][j] === 3) {
+          image(this.imgZombi, j * 30, i * 30, 30, 30);
+        }
+
+        if (this.meuTauler.mapa[i][j] === 4) {
+          image(this.imgDracula, j * 30, i * 30, 30, 30);
       }
     }
   }
