@@ -25,9 +25,6 @@ function preload() {
 function setup() {
   createCanvas(xCanvas, yCanvas);
 
-  // Crear instàncies de Comecocos i Tauler
-  // meuComecocos = new Comecocos(30, 300, 30, "Yellow");
-  // meuTauler = new Tauler();
 
   // Inicialitzar el joc
   joc.iniciarPartida();
@@ -41,11 +38,11 @@ function draw() {
   background(190);
   joc.dibuixarTauler();
 
-  // Dibuixa el Comecocos
-  // joc.dibuixarComecocos();
+  // Dibuixa el Personatge
+  joc.dibuixarPersonatge();
 
   // Dibuixa el menjar i comprova si el Comecocos el menja
-  // joc.dibuixarMenjar();
+  joc.dibuixarMenjar();
 
   // Mostrar puntuació
   fill(0);

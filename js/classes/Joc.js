@@ -1,5 +1,9 @@
 // Importem totes les classes necessàries per al funcionament del joc
 import Tauler from './Tauler.js';
+import Personatge from './Personatge.js';
+import All from './All.js';
+
+
 
 export default class Joc {
 
@@ -25,7 +29,9 @@ export default class Joc {
      * @type {number}
      */
     this.tempsInici = 0;
+    this.meuPersonatge = new Personatge(30, 30, 30, 30);
 
+    this.Alls = [];
     /**
      * Indica si el joc està actiu.
      * @type {boolean}
@@ -136,6 +142,45 @@ export default class Joc {
           image(this.imgTerra, j * 30, i * 30, 30, 30);
         }
       }
+    }
+  }
+
+  dibuixarPersonatge(imgPersonatgeDreta) {
+    this.meuPersonatge.drawPersonatge(imgPersonatgeDreta);
+  }
+
+  repartirAll(){
+    for (let i = 0; i < this.meuTauler.mapa.length; i++) {
+      for (let j = 0; j < this.meuTauler.mapa[i].length; j++) {
+        if (this.meuTauler.mapa[i][j] === 2) {
+          this.Alls.push(new All(j * 30, i * 30, 5));
+        }
+      }
+    }
+  }
+
+  dibuixarMenjar() {
+    this.Alls.forEach(all => {
+      all.drawAll(this.imgAll);
+      let puntsObtinguts = all.checkCollisionAll(this.meuPersonatge.x, this.meuPersonatge.y);
+      if (this.powerUpActiu) {
+        puntsObtinguts *= 2; // Multiplica els punts per 2 si el PowerUp està actiu
+      }
+      this.puntuacio += puntsObtinguts;
+    });
+
+    /**
+     * Verifiquem si ha passat més de 10 segons des que es va activar el PowerUp
+     */
+    if (this.powerUpActiu && this.tempsTranscorregut() - this.tempsPowerUp > 10000) { // 10 segons en mil·lisegons
+      this.powerUpActiu = false; // Desactiva el PowerUp
+    }
+    /**
+     * si no queda menjar, s'acaba la partida
+     */
+    if (this.Alls.length === 0) {
+      this.finalitzarPartida();
+      console.log("Partida finalitzada, ja no hi ha menjar ni cireres.");
     }
   }
 }
